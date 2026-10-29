@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bvk-gestaltung.site/sitemap.xml

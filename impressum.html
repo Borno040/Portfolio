@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Impressum · BvK Gestaltung</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root {
+  --paper: #F2F3EF;
+  --ink: #151816;
+  --muted: #5B635D;
+  --line: #D8DBD3;
+  --accent: #1E6A4F;
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111312; --ink: #E7EAE5; --muted: #9AA39C; --line: #2A2F2C; --accent: #72C9A3;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111312; --ink: #E7EAE5; --muted: #9AA39C; --line: #2A2F2C; --accent: #72C9A3;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--display); font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.top { border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; text-decoration: none; letter-spacing: -.01em; }
+.logo b { font-weight: 700; }
+.mark { width: 30px; height: 30px; flex: none; }
+.m-bg { fill: var(--accent); }
+.m-v { fill: none; stroke: var(--paper); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+.m-dot { fill: var(--paper); }
+.back { font-size: 15px; color: var(--muted); text-decoration: none; }
+.back:hover { color: var(--ink); }
+
+main { padding-block: clamp(56px, 9vw, 104px); }
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; font-weight: 600; margin: 12px 0 40px; }
+.legal { max-width: 65ch; display: grid; gap: 36px; }
+.legal section { display: grid; gap: 8px; padding-top: 20px; border-top: 1px solid var(--line); }
+.legal h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.01em; }
+.legal p, .legal address { margin: 0; font-style: normal; }
+.legal .muted { color: var(--muted); font-size: 15px; }
+.person { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 28px; align-items: start; }
+.person img { width: 140px; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
+.person > div { display: grid; gap: 8px; min-width: 0; }
+@media (max-width: 480px) { .person { grid-template-columns: 1fr; } }
+
+.foot { border-top: 1px solid var(--line); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px; font-size: 14px; color: var(--muted); }
+.foot a { text-decoration: none; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="BvK Gestaltung, zur Startseite">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect class="m-bg" width="32" height="32" rx="8"/><path class="m-v" d="M7.5 10.5 14 22l6.5-11.5"/><circle class="m-dot" cx="25" cy="20.4" r="2.6"/></svg>
+      <span><b>BvK</b> Gestaltung</span>
+    </a>
+    <a class="back" href="index.html">← Zur Startseite</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <span class="label">Rechtliches</span>
+  <h1>Impressum</h1>
+
+  <div class="legal">
+    <section class="person">
+      <img src="bjoern-von-kampen.jpg" width="140" height="169" alt="Björn von Kampen">
+      <div>
+        <span class="label">Angaben gemäß § 5 DDG</span>
+        <address>
+          Björn von Kampen<br>
+          BvK Gestaltung<br>
+          Dulsberg-Süd 5<br>
+          22049 Hamburg<br>
+          Deutschland
+        </address>
+      </div>
+    </section>
+
+    <section>
+      <h2>Kontakt</h2>
+      <p>E-Mail: bvonkampen@outlook.de</p>
+      <p>Kontaktformular: <a href="index.html#kontakt">bvk-gestaltung.site/#kontakt</a></p>
+    </section>
+
+    <section>
+      <h2>Umsatzsteuer</h2>
+      <p>Kleinunternehmer gemäß § 19 UStG. Es wird keine Umsatzsteuer berechnet und ausgewiesen.</p>
+    </section>
+
+    <section>
+      <h2>Verantwortlich für den Inhalt</h2>
+      <p class="muted">nach § 18 Abs. 2 MStV</p>
+      <address>
+        Björn von Kampen<br>
+        Dulsberg-Süd 5<br>
+        22049 Hamburg
+      </address>
+    </section>
+
+    <section>
+      <h2>Beispielprojekte</h2>
+      <p>Die auf der Startseite gezeigten Websites sind Gestaltungsbeispiele. Die dargestellten Betriebe, Personen und Marken sind frei erfunden.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 BvK Gestaltung</span>
+    <span><a href="impressum.html" aria-current="page">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+  </div>
+</footer>
+</body>
+</html>
