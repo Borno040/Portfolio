@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Webdesign in Hamburg | BvK Gestaltung</title>
 <meta name="description" content="Webdesign in Hamburg: individuelle Websites für kleine Betriebe, Praxen und Selbstständige. Zum Studentenpreis von ca. 250 €, fertig in vier Wochen.">
+<meta name="theme-color" content="#123A2E">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
 <meta property="og:site_name" content="BvK Gestaltung">
@@ -18,6 +18,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://bvk-gestaltung.site/">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/familjen-grotesk-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/familjen-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,150 +37,163 @@
 </script>
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
-/* Layout: ruhiger einspaltiger Rahmen; jedes Projekt = Info-Spalte + live gebautes Browserfenster, untereinander */
+/*
+  Gestaltung: „Elbgrün“ – ein tiefes Grün wie die Kupferdächer von Hamburg.
+  Der Einstieg ist ein interaktiver Stil-Wechsler: fünf live gebaute Beispiele in einem Browserfenster.
+  Der Rest der Seite bleibt ruhig, damit die Beispiele wirken.
+*/
 :root {
-  --paper: #F2F3EF;
-  --ink: #151816;
-  --muted: #5B635D;
-  --line: #D8DBD3;
-  --accent: #1E6A4F;
-  --chrome: #E5E7E1;
+  --paper: #F1F2ED;
   --surface: #FFFFFF;
-  --shadow: rgba(20, 30, 25, .18);
-  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --ink: #15201B;
+  --muted: #56615A;
+  --line: #D5DAD2;
+  --accent: #1E6A4F;
+  --elbe: #123A2E;
+  --elbe-2: #184A3B;
+  --patina: #93D4B8;
+  --on-elbe: #E9F1EC;
+  --on-elbe-muted: #A9C2B6;
+  --chrome: #E4E7E0;
+  --shadow: rgba(8, 28, 20, .35);
+  --display: var(--font);
+  --font: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --radius: 14px;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #111312; --ink: #E7EAE5; --muted: #9AA39C; --line: #2A2F2C;
-    --accent: #72C9A3; --chrome: #1C201E; --surface: #181B19; --shadow: rgba(0, 0, 0, .5);
-    color-scheme: dark;
+  :root {
+    --paper: #0F1311; --surface: #161B18; --ink: #E6ECE8; --muted: #9BA79F; --line: #27302B;
+    --accent: #7CCBA8; --chrome: #1B211E; color-scheme: dark;
   }
-}
-:root[data-theme="dark"] {
-  --paper: #111312; --ink: #E7EAE5; --muted: #9AA39C; --line: #2A2F2C;
-  --accent: #72C9A3; --chrome: #1C201E; --surface: #181B19; --shadow: rgba(0, 0, 0, .5);
-  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: 17px;
-  line-height: 1.55;
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font); font-size: 17px; line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
-body::before {
-  content: ""; position: fixed; inset: 0 0 auto;
-  height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper);
-}
+img { max-width: 100%; }
+[hidden] { display: none !important; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.dark :focus-visible { outline-color: var(--patina); }
 
 .wrap {
-  max-width: 1180px; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
-.label {
-  font-family: var(--mono); font-size: 12px; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--muted);
-}
+.dark { background: var(--elbe); color: var(--on-elbe); }
 
 /* Kopfzeile */
-.top {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-  background: var(--paper); border-bottom: 1px solid var(--line);
-}
+.top { position: sticky; top: 0; z-index: 20; background: var(--elbe); color: var(--on-elbe); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; text-decoration: none; letter-spacing: -.01em; }
 .logo b { font-weight: 700; }
 .mark { width: 30px; height: 30px; flex: none; }
-.m-bg { fill: var(--accent); }
-.m-v { fill: none; stroke: var(--paper); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
-.m-dot { fill: var(--paper); }
-.top nav { display: flex; align-items: center; gap: 22px; font-size: 15px; }
-.top nav a { text-decoration: none; color: var(--muted); }
-.top nav a:hover { color: var(--ink); }
-.top nav a.nav-cta { color: var(--paper); background: var(--ink); padding: 7px 16px; border-radius: 999px; font-weight: 500; }
-.progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
-@supports (animation-timeline: scroll()) {
-  .progress { animation: grow linear both; animation-timeline: scroll(root); }
-}
+.m-bg { fill: var(--patina); }
+.m-v { fill: none; stroke: var(--elbe); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+.m-dot { fill: var(--elbe); }
+.top nav { display: flex; align-items: center; gap: 24px; font-size: 15px; }
+.top nav a { text-decoration: none; color: var(--on-elbe-muted); }
+.top nav a:hover { color: var(--on-elbe); }
+.top nav a.nav-cta { color: var(--elbe); background: var(--patina); padding: 8px 18px; border-radius: 999px; font-weight: 600; }
+.top nav a.nav-cta:hover { background: var(--on-elbe); }
+.progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--patina); transform-origin: left; transform: scaleX(0); }
+@supports (animation-timeline: scroll()) { .progress { animation: grow linear both; animation-timeline: scroll(root); } }
 @keyframes grow { to { transform: scaleX(1); } }
 
-/* Einstieg */
-.hero { padding-block: clamp(56px, 10vw, 112px) clamp(48px, 7vw, 80px); }
-.hero h1 {
-  font-size: clamp(2.5rem, 6.4vw, 4.8rem); line-height: 1.02; letter-spacing: -.035em;
-  font-weight: 600; margin: 18px 0 24px; max-width: 15ch; text-wrap: balance;
-}
-.hero h1 em { font-style: normal; color: var(--accent); }
-.hero p { max-width: 54ch; color: var(--muted); font-size: 19px; margin: 0; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+/* Buttons */
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px;
-  font: 500 16px var(--display); text-decoration: none; border: 1px solid var(--ink); cursor: pointer;
-  background: transparent; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px;
+  font: 600 16px var(--font); text-decoration: none; border: 1.5px solid currentColor; cursor: pointer;
+  background: transparent; color: inherit; transition: background-color .15s, color .15s;
 }
-.btn.primary { background: var(--ink); color: var(--paper); }
-.btn:hover { transform: translateY(-1px); }
-.facts {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
-  margin: clamp(48px, 7vw, 72px) 0 0; padding-top: 24px; border-top: 1px solid var(--line);
-}
-.facts div { display: grid; gap: 4px; }
-.facts dt { order: 2; }
-.facts dd { margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-@media (max-width: 600px) { .facts { grid-template-columns: 1fr; gap: 18px; } }
+.btn.primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.dark .btn.primary { background: var(--patina); border-color: var(--patina); color: var(--elbe); }
+.dark .btn.primary:hover { background: var(--on-elbe); border-color: var(--on-elbe); }
+.dark .btn:not(.primary):hover { background: rgba(233, 241, 236, .1); }
 
-/* Arbeiten */
-.intro { padding-block: 24px 8px; display: grid; gap: 10px; }
-.intro h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -.025em; margin: 0; font-weight: 600; text-wrap: balance; }
-.intro p { color: var(--muted); max-width: 58ch; margin: 0; }
-
-.case {
-  display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 48px;
-  padding-block: clamp(48px, 8vw, 88px); border-bottom: 1px solid var(--line);
+/* Einstieg */
+.hero { padding-top: clamp(40px, 6vw, 80px); overflow: hidden; }
+.hero-head { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: end; }
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 5rem); line-height: .98; letter-spacing: -.04em;
+  font-weight: 600; margin: 0; text-wrap: balance;
 }
-.case:last-of-type { border-bottom: 0; }
-.meta { align-self: start; position: sticky; top: 96px; display: grid; gap: 18px; min-width: 0; }
-.meta h3 { margin: 0; font-size: 24px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
-.meta p { margin: 0; color: var(--muted); font-size: 15px; }
-.meta dl { margin: 0; display: grid; gap: 12px; }
-.meta dl div { display: grid; gap: 2px; }
-.meta dd { margin: 0; font-size: 15px; }
+.hero-side p { margin: 0; color: var(--on-elbe-muted); font-size: 18px; max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 28px 0 0; font-size: 15px; color: var(--on-elbe-muted); }
+.facts div { display: flex; gap: 6px; align-items: baseline; }
+.facts dd { margin: 0; order: -1; color: var(--on-elbe); font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .hero-head { grid-template-columns: 1fr; gap: 24px; } }
+
+/* Stil-Wechsler */
+.showcase { margin-top: clamp(48px, 7vw, 80px); }
+.show-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; margin-bottom: 18px; }
+.show-head h2 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+.show-head p { margin: 4px 0 0; color: var(--on-elbe-muted); font-size: 15px; max-width: 52ch; }
+.tabs {
+  display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(0, 0, 0, .22);
+  overflow-x: auto; scrollbar-width: none; max-width: 100%;
+}
+.tabs::-webkit-scrollbar { display: none; }
+@media (max-width: 700px) { .tabs:not(.at-end) { -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); } }
+.tab {
+  flex: none; font: 500 15px var(--font); color: var(--on-elbe-muted); background: transparent;
+  border: 0; border-radius: 999px; padding: 9px 16px; cursor: pointer; white-space: nowrap;
+  transition: background-color .2s, color .2s;
+}
+.tab:hover { color: var(--on-elbe); }
+.tab[aria-selected="true"] { background: var(--on-elbe); color: var(--elbe); }
+.tab i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+
+.stage {
+  display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 0;
+  border-radius: var(--radius) var(--radius) 0 0; overflow: hidden;
+  background: var(--elbe-2); box-shadow: 0 50px 90px -40px var(--shadow);
+}
+.info { display: grid; padding: 26px 24px; border-right: 1px solid rgba(233, 241, 236, .1); }
+.info article { grid-area: 1 / 1; display: grid; gap: 16px; align-content: start; transition: opacity .25s; }
+.info article:not(.is-on) { opacity: 0; visibility: hidden; }
+.info .branch { font-size: 14px; color: var(--patina); font-weight: 500; }
+.info h3 { margin: -10px 0 0; font-size: 24px; line-height: 1.15; letter-spacing: -.02em; font-weight: 600; }
+.info p { margin: 0; color: var(--on-elbe-muted); font-size: 15px; }
+.info dl { margin: 4px 0 0; display: grid; gap: 12px; }
+.info dl div { display: grid; gap: 2px; padding-top: 10px; border-top: 1px solid rgba(233, 241, 236, .12); }
+.info dt { font-size: 13px; color: var(--on-elbe-muted); }
+.info dd { margin: 0; font-size: 15px; }
 .swatches { display: flex; gap: 6px; margin-top: 4px; }
-.swatches i { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); }
-@media (max-width: 860px) {
-  .case { grid-template-columns: 1fr; gap: 24px; }
-  .meta { position: static; }
-  .meta dl { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-}
+.swatches i { width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
 
-.frame {
-  border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface);
-  box-shadow: 0 40px 70px -40px var(--shadow); min-width: 0;
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .frame { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
-  }
-}
-@keyframes rise { from { transform: translateY(48px) scale(.95); } to { transform: none; } }
-.bar { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: var(--chrome); border-bottom: 1px solid var(--line); }
+.frame { min-width: 0; background: var(--surface); display: flex; flex-direction: column; }
+.bar { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: #DDE2DB; color: #4A554E; }
 .dots { display: flex; gap: 6px; flex: none; }
-.dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.dots span { width: 10px; height: 10px; border-radius: 50%; background: #BCC4BC; }
 .url {
-  flex: 1; min-width: 0; font: 12px var(--mono); color: var(--muted); background: var(--paper);
+  flex: 1; min-width: 0; font: 12px var(--mono); background: #F3F5F1;
   border-radius: 6px; padding: 5px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.site { container-type: inline-size; color-scheme: light; overflow: hidden; }
+.screens { position: relative; flex: 1; transition: height .35s ease; }
+.site {
+  position: absolute; inset: 0 0 auto; container-type: inline-size; color-scheme: light; overflow: hidden;
+  display: flex; flex-direction: column; transition: opacity .3s ease, visibility 0s linear .3s;
+}
+.screens > .site:not(.is-on) { position: absolute; inset: 0 0 auto; opacity: 0; visibility: hidden; }
+.screens > .site.is-on { position: relative; transition: opacity .3s ease, visibility 0s; }
 .site p { margin: 0; }
 .site h4 { margin: 0; font-weight: inherit; }
+.site a { text-decoration: none; }
+
+@media (max-width: 900px) {
+  .stage { grid-template-columns: 1fr; }
+  .info { order: 2; border-right: 0; border-top: 1px solid rgba(233, 241, 236, .1); padding: 20px; }
+  .info dl { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
+}
+@media (max-width: 520px) { .info dl { grid-template-columns: 1fr 1fr; } }
 
 /* 1 · Café Morgenrot */
 .cafe { background: #3A1E1D; color: #F5DCC9; font-family: "Cormorant Garamond", Georgia, serif; position: relative; }
@@ -198,7 +213,7 @@ a { color: inherit; }
 .cafe ul { list-style: none; margin: 0; padding: 22px 24px; border: 1px solid rgba(245, 220, 201, .35); display: grid; gap: 12px; font-size: 19px; }
 .cafe li { display: flex; gap: 8px; align-items: baseline; }
 .cafe li::after { content: ""; order: 1; flex: 1; border-bottom: 1px dotted rgba(245, 220, 201, .5); }
-.cafe li b { order: 2; font-weight: 500; font-variant-numeric: tabular-nums; }
+.cafe li b { order: 2; white-space: nowrap; font-weight: 500; font-variant-numeric: tabular-nums; }
 .cafe ul small { font-family: var(--display); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
 .cafe footer { padding: 14px 6cqi; border-top: 1px solid rgba(245, 220, 201, .25); font-family: var(--display); font-size: 13px; opacity: .85; }
 @container (max-width: 620px) { .cafe .body { grid-template-columns: 1fr; } .cafe nav span { display: none; } }
@@ -260,8 +275,8 @@ a { color: inherit; }
 .foto nav span { display: flex; gap: 18px; }
 .foto .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2cqi; padding: 0 5cqi 3cqi; }
 .foto figure { margin: 0; display: grid; gap: 8px; }
-.foto figure div { aspect-ratio: 4 / 5; max-width: 100%; }
-.foto figure:nth-child(2) div { aspect-ratio: 4 / 6; }
+.foto figure div { aspect-ratio: 5 / 4; max-width: 100%; }
+.foto figure:nth-child(2) div { aspect-ratio: 1 / 1; }
 .foto figcaption { font-size: 11px; color: #6B6B66; letter-spacing: .04em; }
 .foto .p1 { background: linear-gradient(170deg, #F3C9A0 0%, #D98E62 45%, #5B3A3A 100%); }
 .foto .p2 { background: linear-gradient(180deg, #A8B8A4 0%, #4F6B4E 55%, #233122 100%); }
@@ -287,102 +302,132 @@ a { color: inherit; }
 }
 @keyframes slide { to { transform: translateX(-50%); } }
 
-/* Ablauf */
-.section { padding-block: clamp(64px, 10vw, 112px); border-top: 1px solid var(--line); }
-.section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -.025em; margin: 10px 0 40px; font-weight: 600; max-width: 22ch; text-wrap: balance; }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: s; }
-.steps li { display: grid; gap: 8px; align-content: start; padding-top: 18px; border-top: 2px solid var(--ink); }
-.steps li::before { counter-increment: s; content: "0" counter(s); font: 500 13px var(--mono); color: var(--accent); }
-.steps h3 { margin: 0; font-size: 20px; font-weight: 600; }
-.steps p { margin: 0; color: var(--muted); font-size: 15px; }
-.steps .label { margin-top: 4px; }
-@media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+/* Abschnitte */
+.section { padding-block: clamp(72px, 10vw, 128px); }
+.section + .section { border-top: 1px solid var(--line); }
+.section h2 {
+  font-size: clamp(2rem, 4.4vw, 3.1rem); line-height: 1.04; letter-spacing: -.03em;
+  margin: 0 0 40px; font-weight: 600; max-width: 20ch; text-wrap: balance;
+}
+.section .sub { color: var(--muted); max-width: 58ch; margin: -16px 0 44px; font-size: 18px; }
 
 /* Über mich */
-.about { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 56px; align-items: start; }
+.about { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: start; }
 .portrait {
-  display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: 14px; border: 1px solid var(--line); background: var(--chrome);
+  display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: var(--radius); background: var(--chrome);
 }
-.about .text { display: grid; gap: 16px; min-width: 0; }
-.about h2 { margin-bottom: 4px; }
-.about p { margin: 0; max-width: 60ch; color: var(--muted); }
-.about p strong { color: var(--ink); font-weight: 500; }
-.promises { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; }
-.promises li { display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+.about .text { display: grid; gap: 18px; min-width: 0; }
+.about h2 { margin-bottom: 6px; }
+.about p { margin: 0; max-width: 60ch; color: var(--muted); font-size: 18px; }
+.about p strong { color: var(--ink); font-weight: 600; }
+.promises { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 36px; }
+.promises li { display: grid; gap: 4px; align-content: start; padding-top: 14px; border-top: 2px solid var(--ink); font-size: 15px; color: var(--muted); }
 .promises b { font-weight: 600; color: var(--ink); font-size: 17px; }
 @media (max-width: 760px) {
   .about { grid-template-columns: 1fr; gap: 32px; }
-  .portrait { max-width: 220px; }
+  .portrait { max-width: 260px; }
   .promises { grid-template-columns: 1fr; }
 }
 
-/* Preise */
-.section .sub { color: var(--muted); max-width: 58ch; margin: -20px 0 40px; }
-.offer { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: start; }
-.offer .plan ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
-.plan { display: grid; gap: 14px; align-content: start; padding: 28px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); min-width: 0; }
-.plan.featured { border: 2px solid var(--accent); padding: 27px; }
-.plan .tag { justify-self: start; font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; background: var(--accent); color: var(--paper); padding: 4px 10px; border-radius: 999px; }
-.plan h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
-.plan > p { margin: 0; color: var(--muted); font-size: 15px; }
-.price { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 600; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
-.price small { font-size: 15px; font-weight: 400; letter-spacing: 0; color: var(--muted); margin-right: 4px; }
-.plan ul { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 8px; font-size: 15px; }
-.plan li { position: relative; padding-left: 24px; }
-.plan li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-.plan .btn { justify-self: start; }
-.plan.featured .btn { background: var(--accent); border-color: var(--accent); color: var(--paper); }
-.why { padding: 24px 28px; border-radius: 14px; background: var(--chrome); display: grid; gap: 10px; align-content: start; }
-.why h3 { margin: 0; font-size: 20px; font-weight: 600; }
-.why p { margin: 0; font-size: 15px; color: var(--muted); }
-.tax { margin: 20px 0 0; font-size: 14px; color: var(--muted); }
-.running { margin-top: 40px; padding: 24px 28px; border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 8px; }
-.running h3 { margin: 0; font-size: 20px; font-weight: 600; }
-.running > p { margin: 0; font-size: 15px; color: var(--muted); max-width: 65ch; }
-.running .promises { margin-top: 8px; }
-.terms { margin-top: 40px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 1000px) { .terms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .terms { grid-template-columns: 1fr; } }
-@media (max-width: 900px) {
-  .offer, .offer .plan ul { grid-template-columns: 1fr; }
+/* Ablauf: vier Wochen als Zeitleiste */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: s; }
+.steps li { display: grid; gap: 10px; align-content: start; padding: 0 28px 0 0; position: relative; }
+.steps .week { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.steps .week::before {
+  counter-increment: s; content: counter(s);
+  display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 50%;
+  background: var(--accent); color: var(--paper); font-size: 15px;
+}
+.steps .week::after { content: ""; flex: 1; height: 2px; background: var(--line); margin-right: -28px; }
+.steps li:last-child .week::after { background: linear-gradient(90deg, var(--line), transparent); }
+.steps h3 { margin: 10px 0 0; font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+.steps p { margin: 0; color: var(--muted); font-size: 15px; max-width: 34ch; }
+.steps small { font-size: 14px; color: var(--ink); font-weight: 500; }
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .steps li { padding: 0 0 32px 52px; }
+  .steps .week { position: absolute; left: 0; top: 0; }
+  .steps .week span { display: none; }
+  .steps .week::after { position: absolute; left: 17px; top: 40px; width: 2px; height: calc(100% + 0px); margin: 0; }
+  .steps li:last-child .week::after { display: none; }
+  .steps h3 { margin-top: 4px; }
 }
 
+/* Preise */
+.offer { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+.plan { display: grid; gap: 16px; align-content: start; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius); background: var(--surface); border: 2px solid var(--accent); min-width: 0; }
+.plan h3 { margin: 0; font-size: 22px; font-weight: 600; }
+.plan .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; }
+.price { font-size: clamp(3.2rem, 7vw, 5rem); font-weight: 600; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; color: var(--accent); }
+.price small { font-size: 18px; font-weight: 500; letter-spacing: 0; color: var(--muted); margin-right: 6px; }
+.plan .price-row p { margin: 0; color: var(--muted); font-size: 15px; max-width: 24ch; }
+.plan ul { list-style: none; margin: 8px 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; font-size: 15px; }
+.plan li { position: relative; padding-left: 26px; }
+.plan li::before {
+  content: ""; position: absolute; left: 0; top: .3em; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3 7 10.6l4.5-5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+}
+.plan .btn { justify-self: start; background: var(--accent); border-color: var(--accent); color: #fff; }
+.why { padding: clamp(24px, 4vw, 40px); border-radius: var(--radius); background: var(--elbe); color: var(--on-elbe); display: grid; gap: 12px; align-content: start; }
+.why h3 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.01em; }
+.why p { margin: 0; font-size: 16px; color: var(--on-elbe-muted); }
+.why p strong { color: var(--patina); font-weight: 600; }
+.terms { margin-top: 48px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.terms li { border-top-width: 1px; border-color: var(--line); }
+.tax { margin: 28px 0 0; font-size: 14px; color: var(--muted); max-width: 80ch; }
+.running { margin-top: 48px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); display: grid; gap: 8px; }
+.running h3 { margin: 0; font-size: 21px; font-weight: 600; }
+.running > p { margin: 0; font-size: 15px; color: var(--muted); max-width: 65ch; }
+.running .promises { margin-top: 10px; }
+.running .promises li { border-top-width: 1px; border-color: var(--line); }
+@media (max-width: 1000px) { .terms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .offer, .plan ul { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .terms { grid-template-columns: 1fr; } }
+
 /* Kontakt */
-.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: start; }
-.contact h2 { margin-bottom: 16px; }
-.contact-info > p { color: var(--muted); max-width: 46ch; margin: 0; }
-.mail { display: grid; gap: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); }
-.form { display: grid; gap: 16px; padding: 28px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); min-width: 0; }
+.contact-sec { border-top: 0 !important; }
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(40px, 6vw, 80px); align-items: start; }
+.contact h2 { margin-bottom: 20px; font-size: clamp(2.4rem, 5.4vw, 4rem); }
+.contact-info > p { color: var(--on-elbe-muted); max-width: 44ch; margin: 0; font-size: 18px; }
+.mail { display: grid; gap: 12px; margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(233, 241, 236, .15); }
+.mail .hint-top { font-size: 14px; color: var(--on-elbe-muted); }
+.mail output { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 600; user-select: all; overflow-wrap: anywhere; }
+.mail .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.mail .note { font-size: 14px; color: var(--patina); }
+.mail .btn { padding: 9px 18px; font-size: 15px; }
+.form { display: grid; gap: 16px; padding: clamp(22px, 3vw, 32px); border-radius: var(--radius); background: var(--paper); color: var(--ink); min-width: 0; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .5); }
 .field { display: grid; gap: 6px; }
-.field label { font-size: 14px; font-weight: 500; }
+.field label { font-size: 14px; font-weight: 600; }
 .field label span { color: var(--muted); font-weight: 400; }
 .field input, .field textarea {
-  width: 100%; font: 16px var(--display); color: var(--ink); background: var(--paper);
-  border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px;
+  width: 100%; font: 16px var(--font); color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 10px; padding: 12px 13px;
 }
 .field textarea { resize: vertical; min-height: 130px; line-height: 1.5; }
 .field input:focus, .field textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
 .form .hint { margin: 0; font-size: 14px; color: var(--muted); }
-.form .btn { justify-self: start; }
+.form .btn { justify-self: start; background: var(--accent); border-color: var(--accent); color: #fff; }
 .form .btn:disabled { opacity: .6; cursor: wait; }
 .status { margin: 0; font-size: 15px; }
 .status:empty { display: none; }
-.status.ok { color: var(--accent); font-weight: 500; }
-.mail output { font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 600; user-select: all; overflow-wrap: anywhere; }
-.mail .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.mail .note { font-size: 14px; color: var(--muted); }
+.status.ok { color: var(--accent); font-weight: 600; }
 @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
 
-.foot { border-top: 1px solid var(--line); }
-.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px; font-size: 14px; color: var(--muted); }
+.foot { background: var(--elbe); color: var(--on-elbe-muted); border-top: 1px solid rgba(233, 241, 236, .1); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 28px; font-size: 14px; }
 .foot a { text-decoration: none; }
+.foot a:hover { color: var(--on-elbe); }
 
 @media (max-width: 760px) { .top nav a.hide-m { display: none; } }
 @media (max-width: 560px) { .top nav { gap: 14px; font-size: 14px; } .top nav a.hide-s { display: none; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .site, .info article, .tab, .screens { transition: none !important; }
+}
 </style>
+</head>
+<body>
 
 <header class="top">
   <div class="wrap">
@@ -401,183 +446,174 @@ a { color: inherit; }
 </header>
 
 <main id="start">
-  <section class="hero wrap">
-    <span class="label">Webdesign in Hamburg</span>
-    <h1>Websites, die so klar sind wie <em>Ihr Angebot.</em></h1>
-    <p>Ich bin Björn aus Hamburg und studiere im Master Innovation Management. Neben dem Studium gestalte ich Websites für kleine Betriebe, Praxen und Selbstständige: individuell statt aus dem Baukasten, zum fairen Studentenpreis und in vier Wochen online.</p>
-    <div class="actions">
-      <a class="btn primary" href="#beispiele">Beispiele ansehen ↓</a>
-      <a class="btn" href="#preise">Preise ansehen</a>
-    </div>
-    <dl class="facts">
-      <div><dt class="label">Richtpreis</dt><dd>ca. 250 €</dd></div>
-      <div><dt class="label">Vom Gespräch zum Launch</dt><dd>4 Wochen</dd></div>
-      <div><dt class="label">Projekte gleichzeitig</dt><dd>max. 2</dd></div>
-    </dl>
-  </section>
-
-  <section id="beispiele" class="wrap">
-    <div class="intro">
-      <span class="label">Stilbeispiele</span>
-      <h2>Fünf Branchen, fünf Handschriften.</h2>
-      <p>Diese Konzepte habe ich für erfundene Betriebe gestaltet, um zu zeigen, wie unterschiedlich eine Website aussehen kann. Jedes Beispiel ist live gebaut und kein Screenshot. Schrift, Farbe und Aufbau richten sich nach dem Betrieb und seinen Kunden.</p>
+  <section class="hero dark">
+    <div class="wrap hero-head">
+      <h1>Websites, die nach Ihrem Betrieb aussehen.</h1>
+      <div class="hero-side">
+        <p>Ich bin Björn aus Hamburg und studiere im Master Innovation Management. Neben dem Studium gestalte ich Websites für kleine Betriebe, Praxen und Selbstständige: individuell statt aus dem Baukasten, zum fairen Studentenpreis und in vier Wochen online.</p>
+        <div class="actions">
+          <a class="btn primary" href="#kontakt">Projekt anfragen</a>
+          <a class="btn" href="#preise">Preise ansehen</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Richtpreis</dt><dd>ca. 250 €</dd></div>
+          <div><dt>bis zum Launch</dt><dd>4 Wochen</dd></div>
+          <div><dt>Projekte gleichzeitig</dt><dd>max. 2</dd></div>
+        </dl>
+      </div>
     </div>
 
-    <article class="case">
-      <div class="meta">
-        <span class="label">Gastronomie</span>
-        <h3>Café Morgenrot</h3>
-        <p>Ein Frühstückscafé mit eigener Backstube. Die Seite soll Appetit machen: warme Töne und eine Speisekarte, die wie gedruckt wirkt.</p>
-        <dl>
-          <div><dt class="label">Stil</dt><dd>Warm &amp; editorial</dd></div>
-          <div><dt class="label">Schrift</dt><dd>Cormorant Garamond</dd></div>
-          <div><dt class="label">Farben</dt><dd class="swatches"><i style="background:#3A1E1D"></i><i style="background:#F5DCC9"></i><i style="background:#F08A5D"></i></dd></div>
-        </dl>
-      </div>
-      <div class="frame">
-        <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">cafe-morgenrot.example</div></div>
-        <div class="site cafe">
-          <nav><b>Morgenrot</b><span><a>Karte</a><a>Über uns</a><a>Anfahrt</a></span></nav>
-          <div class="body">
-            <div>
-              <h4>Frühstück<br>bis <i>15 Uhr.</i></h4>
-              <p class="lead">Sauerteigbrot aus der eigenen Backstube, Eier vom Hof Lindner und Kaffee aus einer Rösterei in Ottensen.</p>
-              <span class="res">Tisch reservieren</span>
-            </div>
-            <ul>
-              <small>Heute auf der Karte</small>
-              <li>Shakshuka mit Feta<b>11,50 €</b></li>
-              <li>Sauerteigbrot, Butter, Honig<b>6,80 €</b></li>
-              <li>Birchermüsli<b>7,90 €</b></li>
-              <li>Flat White<b>3,90 €</b></li>
-            </ul>
-          </div>
-          <footer>Mo–Fr 8–15 Uhr · Sa &amp; So 9–16 Uhr · Lindenstraße 12</footer>
+    <div class="wrap showcase" id="beispiele">
+      <div class="show-head">
+        <div>
+          <h2>Fünf Betriebe, fünf Handschriften</h2>
+          <p>Erfundene Beispiele, alle live gebaut und kein Screenshot. Klicken Sie sich durch.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Stilbeispiele">
+          <button class="tab" role="tab" id="t-cafe" aria-controls="p-cafe" aria-selected="true"><i style="background:#F08A5D"></i>Café</button>
+          <button class="tab" role="tab" id="t-holz" aria-controls="p-holz" aria-selected="false" tabindex="-1"><i style="background:#FFD43B"></i>Tischlerei</button>
+          <button class="tab" role="tab" id="t-physio" aria-controls="p-physio" aria-selected="false" tabindex="-1"><i style="background:#2D8A84"></i>Physiotherapie</button>
+          <button class="tab" role="tab" id="t-foto" aria-controls="p-foto" aria-selected="false" tabindex="-1"><i style="background:#D98E62"></i>Fotografie</button>
+          <button class="tab" role="tab" id="t-fest" aria-controls="p-fest" aria-selected="false" tabindex="-1"><i style="background:#FF4FA3"></i>Festival</button>
         </div>
       </div>
-    </article>
 
-    <article class="case">
-      <div class="meta">
-        <span class="label">Handwerk</span>
-        <h3>Holzwerk Brandt</h3>
-        <p>Eine Tischlerei in dritter Generation. Große Schrift, klare Zahlen und ein deutlicher Button für die Anfrage, ohne Schnickschnack.</p>
-        <dl>
-          <div><dt class="label">Stil</dt><dd>Kräftig &amp; handfest</dd></div>
-          <div><dt class="label">Schrift</dt><dd>Archivo Black</dd></div>
-          <div><dt class="label">Farben</dt><dd class="swatches"><i style="background:#FFD43B"></i><i style="background:#111"></i><i style="background:#A8662F"></i></dd></div>
-        </dl>
-      </div>
-      <div class="frame">
-        <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">holzwerk-brandt.example</div></div>
-        <div class="site holz">
-          <nav>HOLZWERK BRANDT<span>Werkstatt: Mo–Fr 7–17 Uhr</span></nav>
-          <div class="body">
-            <div class="text">
-              <h4>Massivholz<br>nach Maß.</h4>
-              <p class="lead">Küchen, Treppen und Einbauschränke aus unserer Werkstatt in Wandsbek. Aufmaß und Montage inklusive.</p>
-              <span class="cta">Angebot anfragen</span>
-            </div>
-            <div class="wood" role="img" aria-label="Holzmaserung"></div>
-          </div>
-          <div class="stats">
-            <div><b>38</b><span>Jahre Erfahrung</span></div>
-            <div><b>1.200+</b><span>Küchen gebaut</span></div>
-            <div><b>4 Wo.</b><span>Lieferzeit</span></div>
-          </div>
-          <div class="services"><span>Küchen</span><span>Treppen</span><span>Schränke</span><span>Fenster</span></div>
+      <div class="stage">
+        <div class="info">
+          <article class="is-on" data-for="cafe">
+            <span class="branch">Gastronomie</span>
+            <h3>Café Morgenrot</h3>
+            <p>Ein Frühstückscafé mit eigener Backstube. Die Seite soll Appetit machen: warme Töne und eine Speisekarte, die wie gedruckt wirkt.</p>
+            <dl>
+              <div><dt>Stil</dt><dd>Warm &amp; editorial</dd></div>
+              <div><dt>Schrift</dt><dd>Cormorant Garamond</dd></div>
+              <div><dt>Farben</dt><dd class="swatches"><i style="background:#3A1E1D"></i><i style="background:#F5DCC9"></i><i style="background:#F08A5D"></i></dd></div>
+            </dl>
+          </article>
+          <article data-for="holz">
+            <span class="branch">Handwerk</span>
+            <h3>Holzwerk Brandt</h3>
+            <p>Eine Tischlerei in dritter Generation. Große Schrift, klare Zahlen und ein deutlicher Button für die Anfrage, ohne Schnickschnack.</p>
+            <dl>
+              <div><dt>Stil</dt><dd>Kräftig &amp; handfest</dd></div>
+              <div><dt>Schrift</dt><dd>Archivo Black</dd></div>
+              <div><dt>Farben</dt><dd class="swatches"><i style="background:#FFD43B"></i><i style="background:#111"></i><i style="background:#A8662F"></i></dd></div>
+            </dl>
+          </article>
+          <article data-for="physio">
+            <span class="branch">Gesundheit</span>
+            <h3>Physio am Park</h3>
+            <p>Eine Praxis, die weniger Zeit am Telefon verbringen möchte. Die Online-Terminbuchung steht direkt im Blickfeld, alles wirkt ruhig und freundlich.</p>
+            <dl>
+              <div><dt>Stil</dt><dd>Ruhig &amp; vertrauenswürdig</dd></div>
+              <div><dt>Schrift</dt><dd>Nunito</dd></div>
+              <div><dt>Farben</dt><dd class="swatches"><i style="background:#F1F7F6"></i><i style="background:#2D8A84"></i><i style="background:#1F3B3C"></i></dd></div>
+            </dl>
+          </article>
+          <article data-for="foto">
+            <span class="branch">Kreative</span>
+            <h3>Lena Hartmann Fotografie</h3>
+            <p>Eine Hochzeitsfotografin, deren Bilder für sich sprechen. Die Seite tritt zurück: viel Weißraum, kleine Schrift, große Bilder.</p>
+            <dl>
+              <div><dt>Stil</dt><dd>Minimal &amp; galerieartig</dd></div>
+              <div><dt>Schrift</dt><dd>Cormorant + Plex Mono</dd></div>
+              <div><dt>Farben</dt><dd class="swatches"><i style="background:#FAF9F6"></i><i style="background:#1A1A1A"></i><i style="background:#D98E62"></i></dd></div>
+            </dl>
+          </article>
+          <article data-for="fest">
+            <span class="branch">Veranstaltung</span>
+            <h3>Hafenklang Festival</h3>
+            <p>Ein Musikfestival am Hafen. Große Schrift, kräftige Farben und ein laufendes Line-up sorgen dafür, dass die Seite nach Sommer und Bühne aussieht.</p>
+            <dl>
+              <div><dt>Stil</dt><dd>Laut &amp; plakativ</dd></div>
+              <div><dt>Schrift</dt><dd>Anton</dd></div>
+              <div><dt>Farben</dt><dd class="swatches"><i style="background:#1432FF"></i><i style="background:#FF4FA3"></i><i style="background:#FFFFFF"></i></dd></div>
+            </dl>
+          </article>
         </div>
-      </div>
-    </article>
 
-    <article class="case">
-      <div class="meta">
-        <span class="label">Gesundheit</span>
-        <h3>Physio am Park</h3>
-        <p>Eine Physiotherapiepraxis, die weniger Zeit am Telefon verbringen möchte. Die Online-Terminbuchung steht direkt im Blickfeld, alles wirkt ruhig und freundlich.</p>
-        <dl>
-          <div><dt class="label">Stil</dt><dd>Ruhig &amp; vertrauenswürdig</dd></div>
-          <div><dt class="label">Schrift</dt><dd>Nunito</dd></div>
-          <div><dt class="label">Farben</dt><dd class="swatches"><i style="background:#F1F7F6"></i><i style="background:#2D8A84"></i><i style="background:#1F3B3C"></i></dd></div>
-        </dl>
-      </div>
-      <div class="frame">
-        <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">physio-am-park.example/termin</div></div>
-        <div class="site physio">
-          <nav><b>Physio am Park</b><span><a>Leistungen</a><a>Team</a><a>Kontakt</a></span></nav>
-          <div class="body">
-            <div>
-              <h4>Wieder schmerzfrei bewegen.</h4>
-              <p class="lead">Krankengymnastik, Manuelle Therapie und Lymphdrainage in Hamburg-Eimsbüttel. Termine auch abends.</p>
+        <div class="frame">
+          <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url" id="url">cafe-morgenrot.example</div></div>
+          <div class="screens">
+            <div class="site cafe is-on" id="p-cafe" role="tabpanel" aria-labelledby="t-cafe">
+              <nav><b>Morgenrot</b><span><a>Karte</a><a>Über uns</a><a>Anfahrt</a></span></nav>
+              <div class="body">
+                <div>
+                  <h4>Frühstück<br>bis <i>15 Uhr.</i></h4>
+                  <p class="lead">Sauerteigbrot aus der eigenen Backstube, Eier vom Hof Lindner und Kaffee aus einer Rösterei in Ottensen.</p>
+                  <span class="res">Tisch reservieren</span>
+                </div>
+                <ul>
+                  <small>Heute auf der Karte</small>
+                  <li>Shakshuka mit Feta<b>11,50 €</b></li>
+                  <li>Sauerteigbrot, Butter, Honig<b>6,80 €</b></li>
+                  <li>Birchermüsli<b>7,90 €</b></li>
+                  <li>Flat White<b>3,90 €</b></li>
+                </ul>
+              </div>
+              <footer>Mo–Fr 8–15 Uhr · Sa &amp; So 9–16 Uhr · Lindenstraße 12</footer>
             </div>
-            <div class="card">
-              <small>Nächste freie Termine</small>
-              <strong>Dienstag, 3. November</strong>
-              <div class="slots"><span>08:30</span><span class="on">10:00</span><span>14:15</span><span>17:45</span></div>
-              <span class="book">Termin buchen</span>
+            <div class="site holz" id="p-holz" role="tabpanel" aria-labelledby="t-holz">
+              <nav>HOLZWERK BRANDT<span>Werkstatt: Mo–Fr 7–17 Uhr</span></nav>
+              <div class="body">
+                <div class="text">
+                  <h4>Massivholz<br>nach Maß.</h4>
+                  <p class="lead">Küchen, Treppen und Einbauschränke aus unserer Werkstatt in Wandsbek. Aufmaß und Montage inklusive.</p>
+                  <span class="cta">Angebot anfragen</span>
+                </div>
+                <div class="wood" role="img" aria-label="Holzmaserung"></div>
+              </div>
+              <div class="stats">
+                <div><b>38</b><span>Jahre Erfahrung</span></div>
+                <div><b>1.200+</b><span>Küchen gebaut</span></div>
+                <div><b>4 Wo.</b><span>Lieferzeit</span></div>
+              </div>
+              <div class="services"><span>Küchen</span><span>Treppen</span><span>Schränke</span><span>Fenster</span></div>
+            </div>
+            <div class="site physio" id="p-physio" role="tabpanel" aria-labelledby="t-physio">
+              <nav><b>Physio am Park</b><span><a>Leistungen</a><a>Team</a><a>Kontakt</a></span></nav>
+              <div class="body">
+                <div>
+                  <h4>Wieder schmerzfrei bewegen.</h4>
+                  <p class="lead">Krankengymnastik, Manuelle Therapie und Lymphdrainage in Hamburg-Eimsbüttel. Termine auch abends.</p>
+                </div>
+                <div class="card">
+                  <small>Nächste freie Termine</small>
+                  <strong>Nächste Woche, Dienstag</strong>
+                  <div class="slots"><span>08:30</span><span class="on">10:00</span><span>14:15</span><span>17:45</span></div>
+                  <span class="book">Termin buchen</span>
+                </div>
+              </div>
+              <div class="trust"><span>Alle Kassen &amp; privat</span><span>Barrierefrei</span><span>Parkplätze am Haus</span></div>
+            </div>
+            <div class="site foto" id="p-foto" role="tabpanel" aria-labelledby="t-foto">
+              <nav><b>Lena Hartmann</b><span><a>Hochzeiten</a><a>Porträts</a><a>Kontakt</a></span></nav>
+              <div class="grid">
+                <figure><div class="p1"></div><figcaption>Hochzeit · Toskana 2026</figcaption></figure>
+                <figure><div class="p2"></div><figcaption>Elopement · Schwarzwald</figcaption></figure>
+                <figure><div class="p3"></div><figcaption>Paarshooting · Ostsee</figcaption></figure>
+                <figure><div class="p4"></div><figcaption>Porträt · Studio</figcaption></figure>
+                <figure><div class="p5"></div><figcaption>Details · Gut Rosenhof</figcaption></figure>
+                <figure><div class="p6"></div><figcaption>Abendlicht · Bodensee</figcaption></figure>
+              </div>
+              <footer>Termine 2027 auf Anfrage · Hamburg &amp; weltweit</footer>
+            </div>
+            <div class="site fest" id="p-fest" role="tabpanel" aria-labelledby="t-fest">
+              <nav>HAFENKLANG 2027<b>LINE-UP · TICKETS · ANREISE</b></nav>
+              <h4>Hafen<span>klang</span></h4>
+              <div class="date"><span>14.–16. AUGUST 2027 · HAMBURG</span><span class="ticket">TICKETS AB 89 €</span></div>
+              <div class="marquee" aria-label="Line-up: Nachtschicht, Kompass Orchester, Die Möwen, Leuchtfeuer, Blau Rot"><div>NACHTSCHICHT ✶ KOMPASS ORCHESTER ✶ DIE MÖWEN ✶ LEUCHTFEUER ✶ BLAU ROT ✶ NACHTSCHICHT ✶ KOMPASS ORCHESTER ✶ DIE MÖWEN ✶ LEUCHTFEUER ✶ BLAU ROT ✶</div></div>
             </div>
           </div>
-          <div class="trust"><span>Alle Kassen &amp; privat</span><span>Barrierefrei</span><span>Parkplätze am Haus</span></div>
         </div>
       </div>
-    </article>
-
-    <article class="case">
-      <div class="meta">
-        <span class="label">Kreative</span>
-        <h3>Lena Hartmann Fotografie</h3>
-        <p>Eine Hochzeitsfotografin, deren Bilder für sich sprechen. Die Seite tritt zurück: viel Weißraum, kleine Schrift, große Bilder.</p>
-        <dl>
-          <div><dt class="label">Stil</dt><dd>Minimal &amp; galerieartig</dd></div>
-          <div><dt class="label">Schrift</dt><dd>Cormorant + Plex Mono</dd></div>
-          <div><dt class="label">Farben</dt><dd class="swatches"><i style="background:#FAF9F6"></i><i style="background:#1A1A1A"></i><i style="background:#D98E62"></i></dd></div>
-        </dl>
-      </div>
-      <div class="frame">
-        <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">lenahartmann.example/arbeiten</div></div>
-        <div class="site foto">
-          <nav><b>Lena Hartmann</b><span><a>Hochzeiten</a><a>Porträts</a><a>Kontakt</a></span></nav>
-          <div class="grid">
-            <figure><div class="p1"></div><figcaption>Hochzeit · Toskana 2026</figcaption></figure>
-            <figure><div class="p2"></div><figcaption>Elopement · Schwarzwald</figcaption></figure>
-            <figure><div class="p3"></div><figcaption>Paarshooting · Ostsee</figcaption></figure>
-            <figure><div class="p4"></div><figcaption>Porträt · Studio</figcaption></figure>
-            <figure><div class="p5"></div><figcaption>Details · Gut Rosenhof</figcaption></figure>
-            <figure><div class="p6"></div><figcaption>Abendlicht · Bodensee</figcaption></figure>
-          </div>
-          <footer>Termine 2027 auf Anfrage · Hamburg &amp; weltweit</footer>
-        </div>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta">
-        <span class="label">Veranstaltung</span>
-        <h3>Hafenklang Festival</h3>
-        <p>Ein Musikfestival am Hafen. Große Schrift, kräftige Farben und ein laufendes Line-up sorgen dafür, dass die Seite nach Sommer und Bühne aussieht.</p>
-        <dl>
-          <div><dt class="label">Stil</dt><dd>Laut &amp; plakativ</dd></div>
-          <div><dt class="label">Schrift</dt><dd>Anton</dd></div>
-          <div><dt class="label">Farben</dt><dd class="swatches"><i style="background:#1432FF"></i><i style="background:#FF4FA3"></i><i style="background:#FFFFFF"></i></dd></div>
-        </dl>
-      </div>
-      <div class="frame">
-        <div class="bar"><div class="dots"><span></span><span></span><span></span></div><div class="url">hafenklang-festival.example</div></div>
-        <div class="site fest">
-          <nav>HAFENKLANG 2027<b>LINE-UP · TICKETS · ANREISE</b></nav>
-          <h4>Hafen<span>klang</span></h4>
-          <div class="date"><span>14.–16. AUGUST 2027 · HAMBURG</span><span class="ticket">TICKETS AB 89 €</span></div>
-          <div class="marquee" aria-label="Line-up: Nachtschicht, Kompass Orchester, Die Möwen, Leuchtfeuer, Blau Rot"><div>NACHTSCHICHT ✶ KOMPASS ORCHESTER ✶ DIE MÖWEN ✶ LEUCHTFEUER ✶ BLAU ROT ✶ NACHTSCHICHT ✶ KOMPASS ORCHESTER ✶ DIE MÖWEN ✶ LEUCHTFEUER ✶ BLAU ROT ✶</div></div>
-        </div>
-      </div>
-    </article>
+    </div>
   </section>
 
   <section id="ueber-mich" class="section">
     <div class="wrap about">
       <img class="portrait" src="bjoern-von-kampen.jpg" width="480" height="580" alt="Björn von Kampen" loading="lazy">
       <div class="text">
-        <span class="label">Über mich</span>
         <h2>Hallo, ich bin Björn.</h2>
         <p>Ich studiere im Master <strong>Innovation Management mit Schwerpunkt AI Transformation</strong>. Dort geht es darum, wie Unternehmen neue Technologien sinnvoll einsetzen. Diesen Gedanken übertrage ich auf Ihre Website: Sie soll nicht nur gut aussehen, sondern Ihnen Anfragen bringen und Arbeit abnehmen.</p>
         <p>Neben dem Studium baue ich mir mein Portfolio auf. Deshalb biete ich meine Arbeit bis zu meinem Abschluss zum Studentenpreis an, mit dem Anspruch, dass das Ergebnis professionell aussieht und funktioniert.</p>
@@ -593,28 +629,27 @@ a { color: inherit; }
 
   <section id="ablauf" class="section">
     <div class="wrap">
-      <span class="label">Ablauf</span>
       <h2>In vier Wochen zu Ihrer Website.</h2>
       <ol class="steps">
-        <li><h3>Gespräch &amp; Konzept</h3><p>Wir sprechen über Ihren Betrieb, Ihre Kunden und was die Seite leisten soll. Danach bekommen Sie ein schriftliches Angebot mit Leistungsumfang und Festpreis.</p><span class="label">Woche 1 · Erstgespräch kostenlos</span></li>
-        <li><h3>Entwurf</h3><p>Sie bekommen einen klickbaren Entwurf mit Farben, Schriften und echten Texten. Eine Korrekturrunde ist inklusive.</p><span class="label">Woche 2</span></li>
-        <li><h3>Umsetzung</h3><p>Ich baue die Seite, optimiere sie für Handy und Google und richte das Kontaktformular ein.</p><span class="label">Woche 3</span></li>
-        <li><h3>Test &amp; Launch</h3><p>Sie prüfen die fertige Seite und geben sie frei. Danach geht sie online, und Sie erhalten alle Zugänge.</p><span class="label">Woche 4</span></li>
+        <li><div class="week"><span>Woche 1</span></div><h3>Gespräch &amp; Konzept</h3><p>Wir sprechen über Ihren Betrieb, Ihre Kunden und was die Seite leisten soll. Danach bekommen Sie ein schriftliches Angebot mit Leistungsumfang und Festpreis.</p><small>Erstgespräch kostenlos</small></li>
+        <li><div class="week"><span>Woche 2</span></div><h3>Entwurf</h3><p>Sie bekommen einen klickbaren Entwurf mit Farben, Schriften und echten Texten. Eine Korrekturrunde ist inklusive.</p></li>
+        <li><div class="week"><span>Woche 3</span></div><h3>Umsetzung</h3><p>Ich baue die Seite, optimiere sie für Handy und Google und richte das Kontaktformular ein.</p></li>
+        <li><div class="week"><span>Woche 4</span></div><h3>Test &amp; Launch</h3><p>Sie prüfen die fertige Seite und geben sie frei. Danach geht sie online, und Sie erhalten alle Zugänge.</p></li>
       </ol>
     </div>
   </section>
 
   <section id="preise" class="section">
     <div class="wrap">
-      <span class="label">Preise</span>
       <h2>Ein fairer Preis, solange ich studiere.</h2>
       <p class="sub">Jede Website ist anders. Damit Sie trotzdem wissen, woran Sie sind, gibt es einen Richtpreis. Nach dem Erstgespräch bekommen Sie ein schriftliches Angebot zum Festpreis.</p>
       <div class="offer">
-        <article class="plan featured">
-          <span class="tag">Richtpreis</span>
+        <article class="plan">
           <h3>Ihre Website</h3>
-          <div class="price"><small>ca.</small>250 €</div>
-          <p>Für Selbstständige, kleine Betriebe, Praxen und Vereine.</p>
+          <div class="price-row">
+            <div class="price"><small>ca.</small>250 €</div>
+            <p>Richtpreis für Selbstständige, kleine Betriebe, Praxen und Vereine.</p>
+          </div>
           <ul>
             <li>Eigenes Design, keine Vorlage</li>
             <li>Optimiert für Handy und Tablet</li>
@@ -630,7 +665,7 @@ a { color: inherit; }
         <div class="why">
           <h3>Warum so günstig?</h3>
           <p>Ich studiere noch und baue mir neben dem Studium mein Portfolio auf. Sie bekommen eine professionelle Website zum fairen Preis, ich bekomme ein echtes Projekt für meine Referenzen.</p>
-          <p>Dieser Preis gilt bis zu meinem Abschluss.</p>
+          <p><strong>Dieser Preis gilt bis zu meinem Abschluss.</strong></p>
         </div>
       </div>
       <ul class="promises terms">
@@ -651,14 +686,13 @@ a { color: inherit; }
     </div>
   </section>
 
-  <section id="kontakt" class="section">
+  <section id="kontakt" class="section contact-sec dark">
     <div class="wrap contact">
       <div class="contact-info">
-        <span class="label">Kontakt</span>
         <h2>Sie brauchen eine neue Website?</h2>
         <p>Schreiben Sie mir kurz, worum es geht. Ich melde mich innerhalb von zwei Werktagen mit einer ersten Einschätzung und einem Vorschlag für ein kostenloses Erstgespräch.</p>
         <div class="mail">
-          <span class="label">Oder per E-Mail</span>
+          <span class="hint-top">Oder direkt per E-Mail</span>
           <output id="mail-address">bvonkampen@outlook.de</output>
           <div class="row">
             <button class="btn" id="copy-mail" type="button">Adresse kopieren</button>
@@ -674,7 +708,7 @@ a { color: inherit; }
         <div class="field"><label for="f-firma">Betrieb oder Branche <span>(optional)</span></label><input id="f-firma" name="betrieb" autocomplete="organization"></div>
         <div class="field"><label for="f-msg">Worum geht es?</label><textarea id="f-msg" name="nachricht" rows="5" required placeholder="z. B. Ich habe ein Café in Barmbek und brauche eine Seite mit Speisekarte und Öffnungszeiten."></textarea></div>
         <p class="hint">Ihre Angaben nutze ich nur, um Ihre Anfrage zu beantworten. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-        <button class="btn primary" type="submit" id="f-send">Anfrage senden</button>
+        <button class="btn" type="submit" id="f-send">Anfrage senden</button>
         <p class="status" id="f-status" role="status"></p>
       </form>
     </div>
@@ -683,16 +717,86 @@ a { color: inherit; }
 
 <footer class="foot">
   <div class="wrap">
-    <span class="logo">
-      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" style="width:22px;height:22px"><rect class="m-bg" width="32" height="32" rx="6"/><path class="m-v" d="M7.5 10.5 14 22l6.5-11.5"/><circle class="m-dot" cx="25" cy="20.4" r="2.6"/></svg>
-      <span style="font-size:14px">© 2026 BvK Gestaltung</span>
-    </span>
+    <span>© 2026 BvK Gestaltung · Webdesign in Hamburg</span>
     <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
   </div>
 </footer>
 
 <script>
   (function () {
+    // Stil-Wechsler: Tabs schalten Beispiel, Beschreibung und Adresszeile um
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var urls = {
+      cafe: 'cafe-morgenrot.example',
+      holz: 'holzwerk-brandt.example',
+      physio: 'physio-am-park.example/termin',
+      foto: 'lenahartmann.example/arbeiten',
+      fest: 'hafenklang-festival.example'
+    };
+    var url = document.getElementById('url');
+    var screens = document.querySelector('.screens');
+    var tablist = document.querySelector('.tabs');
+    function edge() { tablist.classList.toggle('at-end', tablist.scrollLeft + tablist.clientWidth >= tablist.scrollWidth - 4); }
+    tablist.addEventListener('scroll', edge, { passive: true }); edge();
+    function show(i, focus) {
+      var from = screens.offsetHeight;
+      tabs.forEach(function (t, j) {
+        var on = i === j, key = t.id.slice(2);
+        t.setAttribute('aria-selected', on);
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById('p-' + key).classList.toggle('is-on', on);
+        document.querySelector('.info [data-for="' + key + '"]').classList.toggle('is-on', on);
+        if (on) {
+          url.textContent = urls[key];
+          if (focus) t.focus();
+          var bar = t.parentNode;
+          bar.scrollTo({ left: t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
+        }
+      });
+      // Fensterhöhe weich an das neue Beispiel anpassen
+      var to = screens.querySelector('.is-on').offsetHeight;
+      if (from !== to) {
+        screens.style.height = from + 'px';
+        screens.offsetHeight;
+        screens.style.height = to + 'px';
+        clearTimeout(screens._t);
+        screens._t = setTimeout(function () { screens.style.height = ''; }, 400);
+      }
+    }
+    var tour = null;
+    function stopTour() { if (tour) { clearInterval(tour); tour = null; } }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { stopTour(); show(i); });
+      t.addEventListener('keydown', function (e) {
+        var n = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (e.key === 'Home') n = -i; else if (e.key === 'End') n = tabs.length - 1 - i;
+        if (n === undefined) return;
+        e.preventDefault(); stopTour();
+        show((i + n + tabs.length) % tabs.length, true);
+      });
+    });
+
+    // Einmalige kurze Tour durch alle fünf Stile, sobald das Fenster sichtbar ist
+    var stage = document.querySelector('.stage');
+    ['pointerdown', 'wheel', 'touchstart'].forEach(function (ev) { stage.addEventListener(ev, stopTour, { passive: true }); });
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!calm && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        var step = 0;
+        setTimeout(function () {
+          tour = setInterval(function () {
+            step++;
+            show(step % tabs.length);
+            if (step >= tabs.length) stopTour();
+          }, 900);
+        }, 700);
+      }, { threshold: .5 });
+      io.observe(stage);
+    }
+
+    // E-Mail-Adresse kopieren
     var btn = document.getElementById('copy-mail');
     var note = document.getElementById('copy-note');
     var addr = document.getElementById('mail-address');
@@ -743,5 +847,5 @@ a { color: inherit; }
     });
   })();
 </script>
-
+</body>
 </html>
