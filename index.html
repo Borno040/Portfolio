@@ -400,6 +400,7 @@ a { color: inherit; }
 .mail .note { font-size: 14px; color: var(--patina); }
 .mail .btn { padding: 9px 18px; font-size: 15px; }
 .form { display: grid; gap: 16px; padding: clamp(22px, 3vw, 32px); border-radius: var(--radius); background: var(--paper); color: var(--ink); min-width: 0; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, .5); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .field { display: grid; gap: 6px; }
 .field label { font-size: 14px; font-weight: 600; }
 .field label span { color: var(--muted); font-weight: 400; }
@@ -777,9 +778,9 @@ a { color: inherit; }
           </div>
         </div>
       </div>
-      <form class="form" id="contact-form" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="kontakt">
-        <p hidden><label>Bitte nicht ausfüllen: <input name="bot-field" id="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <form class="form" id="contact-form" action="https://forms.formward.eu/f/b3f54a42-3cb5-4a42-ae39-4f3425535608" method="POST">
+        <input type="hidden" name="_subject" value="Neue Anfrage über bvk-gestaltung.site">
+        <p class="hp" aria-hidden="true"><label>Bitte nicht ausfüllen: <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
         <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" required autocomplete="name"></div>
         <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" required autocomplete="email"></div>
         <div class="field"><label for="f-firma">Betrieb oder Branche <span>(optional)</span></label><input id="f-firma" name="betrieb" autocomplete="organization"></div>
@@ -904,23 +905,23 @@ a { color: inherit; }
       }
     });
 
-    // Kontaktformular: sendet per Netlify Forms, nur auf der echten Domain
+    // Kontaktformular: sendet über Formward (EU) an mein Postfach, nur auf der echten Domain
     var form = document.getElementById('contact-form');
     var send = document.getElementById('f-send');
     var status = document.getElementById('f-status');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.className = 'status';
-      if (!/(^|\.)bvk-gestaltung\.site$|\.netlify\.app$/.test(location.hostname)) {
+      if (!/(^|\.)bvk-gestaltung\.site$/.test(location.hostname)) {
         status.textContent = 'Vorschau: Das Formular sendet erst auf bvk-gestaltung.site.';
         return;
       }
       send.disabled = true;
       status.textContent = 'Wird gesendet …';
-      fetch('/', {
+      fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
+        headers: { 'Accept': 'application/json' },
+        body: new URLSearchParams(new FormData(form))
       }).then(function (res) {
         if (!res.ok) throw new Error(res.status);
         form.reset();
